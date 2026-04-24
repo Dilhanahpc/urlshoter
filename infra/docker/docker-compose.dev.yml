@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+
+  api-gateway:
+    build: ../../services/api-gateway
+    ports:
+      - "8080:8080"
+
+  url-service:
+    build: ../../services/url-service
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/url
+
+  redirect-service:
+    build: ../../services/redirect-service
+    environment:
+      - REDIS_URL=redis://redis:6379
+
+  mongo:
+    image: mongo
+
+  redis:
+    image: redis
